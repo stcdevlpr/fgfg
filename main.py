@@ -5,7 +5,7 @@ import random
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from dotenv import load_dotenv
 from pyrogram import Client
-from pyrogram.enums import ChatMemberStatus
+from pyrogram.enums import ChatMemberStatus, ChatType
 from pyrogram.errors import FloodWait
 from pyrogram import filters
 from pyrogram.types import Message
@@ -20,16 +20,13 @@ SESSION_NAME = "account"
 
 # Настройки
 custom_messages = [
-    "1",
-    "2",
-    "3",
+    "1"
+    "2"
+    "3"
     "4"
 ]
 
-
 custom_interval = DEFAULT_JOB_INTERVAL
-admin_id = int(os.getenv("Admin_id"))
-
 
 # Получение переменных окружения
 API_ID = str(os.getenv("Api_id"))
@@ -115,8 +112,8 @@ async def main():
         await asyncio.Event().wait()  # Ожидание завершения работы
 
 
-@client.on_message(filters.private)
-async def handle_private_message(message: Message):
+async def handle_private_message(client: Client, message: Message):
+    if message.chat.type != ChatType.PRIVATE: print(message);return
     """
     Обработчик входящих сообщений.
     """
