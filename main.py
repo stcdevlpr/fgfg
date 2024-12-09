@@ -112,14 +112,5 @@ async def main():
         await asyncio.Event().wait()  # Ожидание завершения работы
 
 
-async def handle_private_message(client: Client, message: Message):
-    if message.chat.type != ChatType.PRIVATE: print(message);return
-    """
-    Обработчик входящих сообщений.
-    """
-    print(f"Получено сообщение от {message.from_user.id}: {message.text}")
-    await message.reply("Спасибо за ваше сообщение! Мы скоро ответим.")
-
-
 if __name__ == "__main__":
     asyncio.run(main())  # Запуск asyncio.run только для основной функции
